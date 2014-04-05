@@ -27,7 +27,6 @@ public class TopMenu extends AbstractPage {
     }
 
     public SpecialistPage openSpecialistPage() {
-
         specialistButton.click();
         return PageFactory.initElements(getDriver(), SpecialistPage.class);
     }

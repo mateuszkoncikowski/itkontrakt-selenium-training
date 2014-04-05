@@ -2,6 +2,7 @@ package pages;
 
 import components.TopMenu;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 
 /**
  * User: Mateusz Koncikowski
@@ -15,7 +16,7 @@ public class IndexPage extends AbstractPage{
 
     public IndexPage(WebDriver driver) {
         super(driver);
-        topMenu = new TopMenu(driver);
+        topMenu = PageFactory.initElements(driver, TopMenu.class);
     }
 
     public TopMenu getTopMenu() {

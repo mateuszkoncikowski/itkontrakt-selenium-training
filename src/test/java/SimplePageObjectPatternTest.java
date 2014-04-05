@@ -5,9 +5,6 @@ import pages.CompanyPage;
 import pages.IndexPage;
 import pages.SpecialistPage;
 
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.core.IsEqual.equalTo;
-
 /**
  * User: Mateusz Koncikowski
  * Date: 05/04/14
@@ -24,13 +21,6 @@ public class SimplePageObjectPatternTest {
         SpecialistPage specialistPage = indexPage.getTopMenu().openSpecialistPage();
         CompanyPage companyPage = specialistPage.getTopMenu().openCompanyPage();
         companyPage.getTopMenu().openSpecialistPage();
-
-        SpecialistPage specialistPage1 = indexPage
-                .getTopMenu().openCompanyPage()
-                .getTopMenu().openSpecialistPage();
-
-        assertThat(specialistPage.getPageSource(), equalTo(""));
-
     }
 
     @Before
