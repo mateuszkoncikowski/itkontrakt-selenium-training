@@ -1,9 +1,16 @@
+import enums.Localization;
+import enums.Position;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import pages.CompanyPage;
 import pages.IndexPage;
-import pages.SpecialistPage;
+import pages.SearchResultPage;
+
+import java.util.List;
+
+import static java.util.Arrays.asList;
+import static org.hamcrest.CoreMatchers.containsString;
+import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
  * User: Mateusz Koncikowski
@@ -17,10 +24,37 @@ public class SimplePageObjectPatternTest {
     private IndexPage indexPage;
 
     @Test
-    public void simplePageObjectTest() {
-        SpecialistPage specialistPage = indexPage.getTopMenu().openSpecialistPage();
-        CompanyPage companyPage = specialistPage.getTopMenu().openCompanyPage();
-        companyPage.getTopMenu().openSpecialistPage();
+    public void test_1() {
+        List<Localization> localizations = asList(Localization.WROCLAW, Localization.WARSZAWA);
+        List<Position> positions = asList(Position.DEVELOPER, Position.TESTER);
+
+
+        SearchResultPage searchResultPage = indexPage
+                .getTopMenu().openSpecialistPage()
+                .getSearchJobForm()
+                .setKeywords("tester")
+                .setLocalizations(localizations)
+                .setPositions(positions)
+                .search();
+
+        String expectedString = "Brak ofert spełniających podane kryteria wyszukiwania";
+        assertThat(searchResultPage.getPageSource(), containsString(expectedString));
+    }
+
+    @Test
+    public void test_2() {
+        List<Localization> localizations = asList(Localization.WROCLAW, Localization.WARSZAWA);
+        List<Position> positions = asList(Position.TESTER);
+
+        SearchResultPage searchResultPage = indexPage
+                .getSearchJobForm()
+                .setKeywords("tester")
+                .setLocalizations(localizations)
+                .setPositions(positions)
+                .search();
+
+        String expectedString = "Brak ofert spełniających podane kryteria wyszukiwania";
+        assertThat(searchResultPage.getPageSource(), containsString(expectedString));
     }
 
     @Before

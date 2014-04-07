@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * User: Mateusz Koncikowski
@@ -16,9 +17,20 @@ public class AbstractPage {
         this.driver = driver;
     }
 
+    public void typeInto(WebElement we, String value) {
+        we.clear();
+        we.sendKeys(value);
+    }
+
+    public void clickElement(WebElement we) {
+        we.click();
+    }
+
     public String getPageSource() {
         return driver.getPageSource();
     }
+
+
 
     public WebDriver getDriver() {
         return driver;

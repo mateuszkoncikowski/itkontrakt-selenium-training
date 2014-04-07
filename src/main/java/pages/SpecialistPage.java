@@ -1,5 +1,6 @@
 package pages;
 
+import components.SearchJobForm;
 import components.TopMenu;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
@@ -12,14 +13,20 @@ import org.openqa.selenium.support.PageFactory;
 
 public class SpecialistPage extends AbstractPage {
 
-    private final TopMenu topMenu;
+    private TopMenu topMenu;
+    private SearchJobForm searchJob;
 
     public SpecialistPage(WebDriver driver) {
         super(driver);
         topMenu = PageFactory.initElements(getDriver(), TopMenu.class);
+        searchJob = PageFactory.initElements(getDriver(), SearchJobForm.class);
     }
 
     public TopMenu getTopMenu() {
         return topMenu;
+    }
+
+    public SearchJobForm getSearchJobForm() {
+        return searchJob;
     }
 }
